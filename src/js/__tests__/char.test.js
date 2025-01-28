@@ -1,13 +1,17 @@
 import { healthStatus } from '../char'
 
 
-let healthTestValues = [99, 50, 1];
-    let expectedStrings = ['healthy', 'wounded', 'critical']
+test('should return healthy', () => {
+    let result = healthStatus({name: 'test_name', health: 99});
+    expect(result).toBe('healthy');
+});
 
+test('should return wounded', () => {
+    let result = healthStatus({name: 'test_name', health: 50});
+    expect(result).toBe('wounded');
+});
 
-for (let i = 0; i < 3; ++i) {
-    test('health status test', () => {
-        let result = healthStatus({name: 'test_name', health: healthTestValues[i]});
-        expect(result).toBe(expectedStrings[i]);
-    });
-}
+test('should return critical', () => {
+    let result = healthStatus({name: 'test_name', health: 1});
+    expect(result).toBe('critical');
+});
