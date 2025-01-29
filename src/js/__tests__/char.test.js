@@ -1,17 +1,12 @@
 import { healthStatus } from '../char'
 
 
-test('should return healthy', () => {
-    let result = healthStatus({name: 'test_name', health: 99});
-    expect(result).toBe('healthy');
-});
-
-test('should return wounded', () => {
-    let result = healthStatus({name: 'test_name', health: 50});
-    expect(result).toBe('wounded');
-});
-
-test('should return critical', () => {
-    let result = healthStatus({name: 'test_name', health: 1});
-    expect(result).toBe('critical');
+describe('heath status function', () => {
+    test.each([
+        [{name: 'test_name', health: 99}, 'healthy'],
+        [{name: 'test_name', health: 50}, 'wounded'],
+        [{name: 'test_name', health: 1}, 'critical']
+    ])('should return health status string', (charObj, expectedStr) => {
+        expect(healthStatus(charObj)).toBe(expectedStr);
+    });
 });
